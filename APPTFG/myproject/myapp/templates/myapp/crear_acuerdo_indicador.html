@@ -1,0 +1,13 @@
+{% extends "myapp/base.html" %}
+
+
+
+{% block content %}
+  <h1>Añadir Indicador al AGC</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Añadir</button>
+  </form>
+  <a href="{% url 'gestionar_indicadores_agc' agc_pk %}">Cancelar</a>
+{% endblock %}

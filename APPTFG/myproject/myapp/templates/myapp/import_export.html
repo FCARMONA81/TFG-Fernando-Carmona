@@ -1,0 +1,38 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Importar/Exportar{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h4 class="mb-4">Importar/Exportar</h4>
+
+    <div class="mb-5">
+        <h5>Exportar AGCs</h5>
+        <a href="{% url 'export_agc_excel' %}" class="btn btn-success">Exportar a Excel</a>
+    </div>
+
+    <div>
+        <h5>Importar resultados AGCs</h5>
+        <form method="post" action="{% url 'import_agc_excel' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Importar</button>
+        </form>
+    </div>
+    
+    <div class="mb-5">
+        <h2>Exportar Plantilla Objetivos</h2>
+        <a href="{% url 'export_objetivo_template' %}" class="btn btn-success">Exportar Plantilla Objetivos a Excel</a>
+    </div>
+
+    <div>
+        <h2>Importar Objetivos</h2>
+        <form method="post" action="{% url 'import_objetivo_excel' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Importar Objetivos</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

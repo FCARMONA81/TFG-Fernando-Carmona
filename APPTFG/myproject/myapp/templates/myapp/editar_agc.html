@@ -1,0 +1,53 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Editar AGC{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h4 class="mb-4">Editar AGC</h4>
+  <form method="post" class="mb-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+    <a href="{% url 'gestionar_agc' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+  </form>
+
+  <h5 class="mb-3">Indicadores asociados al AGC</h5>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Indicador</th>
+        <th>Valor Mínimo</th>
+        <th>Valor Óptimo</th>
+        <th>Valor Obtenido</th>
+        <th>Peso</th>
+        <th>Resultado</th>
+        <th>% Conseguido</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for acuerdo in indicadores %}
+      <tr>
+        <td>{{ acuerdo.id_indicador.nombre_indicador }}</td>
+        <td>{{ acuerdo.valor_min }}</td>
+        <td>{{ acuerdo.valor_opt }}</td>
+        <td>{{ acuerdo.valor_obtenido }}</td>
+        <td>{{ acuerdo.peso_indicador }}</td>
+        <td>{{ acuerdo.resultado_indicador }}</td>
+        <td>{{ acuerdo.porcentaje_conseguido }}</td>
+        <td>
+          <a href="{% url 'editar_acuerdo_indicador' acuerdo.pk %}" class="btn btn-warning btn-sm">Editar</a>
+          <form method="post" action="{% url 'eliminar_acuerdo_indicador' acuerdo.pk %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'crear_acuerdo_indicador' agc.pk %}" class="btn btn-primary btn-sm">Añadir Indicador</a>
+</div>
+{% endblock %}

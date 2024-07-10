@@ -1,0 +1,11 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+  <h1>Editar Indicador del AGC</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+  <a href="{% url 'gestionar_indicadores_agc' acuerdo_indicador.id_agc.pk %}">Cancelar</a>
+{% endblock %}

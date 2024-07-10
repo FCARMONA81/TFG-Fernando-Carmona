@@ -1,0 +1,15 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Crear UGC{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Crear UGC</h1>
+    <form method="post" action="" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'gestionar_ugc' %}" class="btn btn-secondary ml-2">Volver a la lista de UGC</a>
+    </form>
+</div>
+{% endblock %}

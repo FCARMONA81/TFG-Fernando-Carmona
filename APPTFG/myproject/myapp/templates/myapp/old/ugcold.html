@@ -1,0 +1,24 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Gestionar UGC{% endblock %}
+
+{% block content %}
+    <h1>Gestionar UGC</h1>
+    <ul>
+        {% for ugc in ugcs %}
+        <li>
+            {{ ugc.nombre_ugc }} - {{ ugc.descripcion_ugc }} - Responsable: {{ ugc.responsable_ugc }} - Fecha Creación: {{ ugc.fecha_crea_ugc }}
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="id_ugc" value="{{ ugc.id_ugc }}">
+                <button type="submit" name="delete">Eliminar</button>
+            </form>
+            <a href="{% url 'editar_ugc' ugc.id_ugc %}">Editar</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_ugc' %}">Crear UGC</a>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endblock %}

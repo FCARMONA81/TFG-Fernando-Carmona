@@ -1,0 +1,13 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Editar Indicador{% endblock %}
+
+{% block content %}
+  <h1>Editar Indicador</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+  <a href="{% url 'gestionar_indicadores' %}">Cancelar</a>
+{% endblock %}
